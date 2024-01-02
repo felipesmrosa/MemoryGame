@@ -1,0 +1,53 @@
+.win {
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  &__message {
+    background-color: #6d6dff;
+    margin: 15% auto;
+    padding: 3rem 23px;
+    border: 2px solid #202020;
+    width: 80%;
+    text-align: center;
+    max-width: 18%;
+    height: auto;
+    border-radius: 8px;
+    font-size: 1.25rem;
+    text-transform: uppercase;
+    font-weight: 500;
+    box-shadow: 0px 0px 20px -5px blue;
+
+    &--btn {
+      border: 2px solid $secundaria;
+      background-color: transparent;
+      color: $secundaria;
+      font-weight: 500;
+      padding: 0.3rem 1rem;
+      font-size: 1.25rem;
+      text-transform: uppercase;
+      border-radius: 4px;
+      transition: all 0.3s ease-in-out;
+      margin-top: 1rem;
+      &:hover {
+        cursor: pointer;
+        border: 2px solid $secundaria;
+        background-color: $secundaria;
+        color: $preto;
+      }
+    }
+
+    &--confeti {
+      width: 0;
+      margin: 0 auto;
+      height: 0;
+      position: relative;
+      left: 0rem;
+      top: -25rem;
+      z-index: 9999999;
+    }
+  }
+}

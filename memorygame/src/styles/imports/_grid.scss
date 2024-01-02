@@ -1,0 +1,39 @@
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.3rem;
+  border: 2px solid #252844;
+  border-radius: 15px;
+  padding: 0.4rem;
+}
+.text {
+  padding: 1rem 0;
+  h1 {
+    color: $secundaria;
+    @extend %dflex;
+    gap: 0.6rem;
+    text-transform: uppercase;
+    p {
+      color: #a7a7a7;
+    }
+  }
+  &--crown {
+    font-size: 2.8rem;
+    color: goldenrod;
+    cursor: pointer;
+  }
+  &--joker {
+    font-size: 3rem;
+    color: $secundaria;
+    cursor: pointer;
+  }
+  &--dflex {
+    @extend %dflex;
+    justify-content: space-between;
+    margin: 1.5rem 0;
+    color: $branco;
+  }
+  &--tooltip {
+    font-size: 0.875rem;
+  }
+}

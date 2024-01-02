@@ -12,7 +12,6 @@ export function Card({ flipped = false, back, handleClick, id }: CardProps) {
   function handleClickFn(id: string) {
     if (handleClick) {
       handleClick(id);
-
     }
   }
   return (
