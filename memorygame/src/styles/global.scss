@@ -18,6 +18,26 @@ $fontFamily: "Poppins", sans-serif;
   display: flex;
   align-items: center;
 }
+%alinhamento {
+  @extend %dflex;
+  justify-content: center;
+}
+%primeiroLugar {
+  @extend %dflex;
+  justify-content: space-between;
+}
+%segundoLugar {
+  @extend %dflex;
+  justify-content: space-between;
+}
+%terceiroLugar {
+  @extend %dflex;
+  justify-content: space-between;
+}
+%outrosRanking {
+  @extend %dflex;
+  justify-content: space-between;
+}
 
 * {
   margin: 0;
@@ -63,4 +83,27 @@ button {
 #seconds {
   font-family: "Press Start 2P";
   font-weight: bold;
+}
+li:nth-child(1) {
+  color: #ffd700;
+  font-size: 1.5rem;
+  svg {
+    display: block;
+  }
+}
+li:nth-child(2) {
+  color: #c0c0c0;
+  font-size: 1.1rem;
+}
+li:nth-child(3) {
+  color: #cd7f32;
+  margin-bottom: 2rem;
+  font-size: 1.1rem;
+}
+li {
+  color: $branco;
+  font-size: 0.875rem;
+  svg {
+    display: none;
+  }
 }

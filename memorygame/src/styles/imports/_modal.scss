@@ -74,6 +74,7 @@
       @extend %dflex;
       justify-content: center;
       flex-direction: column;
+      width: 78%;
       &__player {
         color: #a7a7a7;
         margin-top: 1rem;
@@ -106,14 +107,14 @@
         justify-content: center;
 
         background-color: $secundaria;
-        color: $preto;
+        color: #232323;
 
-        width: 17%;
+        width: 100%;
         height: 3rem;
+        box-shadow: 3px 3px 0px 0px #2c2c95;
 
-        &:hover {
-          background-color: $preto;
-          color: $secundaria;
+        &:active {
+          box-shadow: inset 3px 3px 0px 0px #2c2c95;
         }
       }
     }

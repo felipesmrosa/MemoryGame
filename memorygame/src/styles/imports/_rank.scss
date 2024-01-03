@@ -19,10 +19,56 @@
     }
   }
   &__lista {
-    padding: 1rem;
+    padding: 1rem 1rem 1rem 2rem;
+    color: $branco;
+    height: 32.4rem;
+    overflow-y: scroll;
+    &::-webkit-scrollbar {
+      width: 5px; /* width of the entire scrollbar */
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background-color: #3f3f3f; /* color of the scroll thumb */
+      border-radius: 20px; /* roundness of the scroll thumb */
+    }
     &__player {
-      @extend %dflex;
-      justify-content: space-between;
+      &--primeiroLugar {
+        @extend %primeiroLugar;
+        &-alinhado {
+          @extend %alinhamento;
+          svg {
+            font-size: 1.3rem;
+          }
+          &-medal {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      &--segundoLugar {
+        @extend %segundoLugar;
+        &-alinhado {
+          @extend %alinhamento;
+          &-medal {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      &--terceiroLugar {
+        @extend %terceiroLugar;
+        &-alinhado {
+          @extend %alinhamento;
+          &-medal {
+            font-size: 2.5rem;
+          }
+        }
+      }
+      &--outrosRanking {
+        @extend %outrosRanking;
+        font-size: 0.875rem;
+        &-alinhado {
+          @extend %alinhamento;
+        }
+      }
     }
   }
 }

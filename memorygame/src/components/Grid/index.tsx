@@ -6,6 +6,7 @@ import { Modal } from "../Modal";
 
 import { GiCardJoker, GiQueenCrown } from "react-icons/gi";
 import { Rank } from "../Rank";
+import { RankInterior } from "../RankInterior";
 
 export interface GridProps {
   cards: CardProps[];
@@ -129,7 +130,6 @@ export function Grid({ cards }: GridProps) {
 
   return (
     <>
-      {/* {ranking && <Rank />} */}
       <Modal
         openRank={openRank}
         startGame={startGame}
@@ -143,8 +143,14 @@ export function Grid({ cards }: GridProps) {
       />
 
       <div className="text">
+        <div style={{ cursor: "pointer" }} className="text--GG">
+          <p>G</p>
+          <p className="text--GG-g">G</p>
+        </div>
         <h1>
           Memory <p>Game</p> <GiCardJoker className="text--joker" />
+          <GiQueenCrown onClick={openRank} className="text--crown" />
+          {ranking && <RankInterior />}
         </h1>
         <p className="text--dflex">
           <p>
@@ -165,13 +171,12 @@ export function Grid({ cards }: GridProps) {
               style={{
                 fontSize: "16px",
                 backgroundColor: "#4646de",
-                color: "##a7a7a7",
+                color: "#a7a7a7",
               }}
               id="tempoDoDesafio"
             />
           </div>
         </p>
-        <GiQueenCrown onClick={openRank} className="text--crown" />
       </div>
       <div className="grid">
         {stateCards.map((card) => (

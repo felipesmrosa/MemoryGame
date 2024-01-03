@@ -1,16 +1,36 @@
+import { IoStar } from "react-icons/io5";
+import axios from "axios";
+import { useEffect, useState } from "react";
+
 export function Rank() {
+  const [listPlayers, setListPlayers] = useState([]);
+
+  useEffect(() => {
+    axios.get("http://localhost:5174/getInfos").then((response) => {
+      setListPlayers(response.data);
+    });
+  }, []);
+
   return (
     <div className="rank">
       <h3>
         Top <p>players</p>
       </h3>
       <hr />
-      <div className="rank__lista">
-        <span className="rank__lista__player">
-          <p>1° - Felipe</p>
-          <p>5s</p>
-        </span>
-      </div>
+      <ol className="rank__lista">
+        {listPlayers.map((player) => {
+          return (
+            <li className="rank__lista__player">
+              <div className="rank__lista__player--primeiroLugar">
+                <p className="rank__lista__player--primeiroLugar-alinhado">
+                  {player.name} <IoStar />
+                </p>
+                <p>50s</p>
+              </div>
+            </li>
+          );
+        })}
+      </ol>
     </div>
   );
 }
