@@ -5,8 +5,6 @@ import { IoStar } from "react-icons/io5";
 export function RankInterior() {
   const [listPlayers, setListPlayers] = useState([]);
 
-  console.log(listPlayers);
-
   useEffect(() => {
     axios.get("http://localhost:5174/getInfos").then((response) => {
       setListPlayers(response.data);
@@ -15,7 +13,7 @@ export function RankInterior() {
   return (
     <div className="ranki">
       <h3>
-        Top <p style={{color: '#a7a7a7'}}>players</p>
+        Top <p style={{ color: "#a7a7a7" }}>players</p>
       </h3>
       <hr />
       <ol className="ranki__lista">

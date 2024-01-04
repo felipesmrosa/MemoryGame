@@ -3,13 +3,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 export function Rank() {
-  const [listPlayers, setListPlayers] = useState([]);
+  const [player, setPlayers] = useState([]);
 
   useEffect(() => {
-    axios.get("http://localhost:5174/getInfos").then((response) => {
-      setListPlayers(response.data);
+    axios.get("http://localhost:5174/getplayers").then((response) => {
+      setPlayers(response.data);
     });
   }, []);
+
+  console.log(player);
 
   return (
     <div className="rank">
@@ -18,14 +20,14 @@ export function Rank() {
       </h3>
       <hr />
       <ol className="rank__lista">
-        {listPlayers.map((player) => {
+        {player.map((play) => {
           return (
             <li className="rank__lista__player">
               <div className="rank__lista__player--primeiroLugar">
                 <p className="rank__lista__player--primeiroLugar-alinhado">
-                  {player.name} <IoStar />
+                  {play.usuario} <IoStar />
                 </p>
-                <p>50s</p>
+                <p>{play.tempo}s</p>
               </div>
             </li>
           );

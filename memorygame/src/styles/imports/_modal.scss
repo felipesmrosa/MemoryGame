@@ -91,6 +91,11 @@
           color: $secundaria;
         }
       }
+      &__error {
+        font-size: 0.7rem;
+        color: #e45959;
+        margin-top: 0.5rem;
+      }
       &__cadastrarEResetarSenha {
         @extend %dflex;
         gap: 8.6rem;

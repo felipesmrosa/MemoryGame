@@ -7,6 +7,7 @@ import { Modal } from "../Modal";
 import { GiCardJoker, GiQueenCrown } from "react-icons/gi";
 import { Rank } from "../Rank";
 import { RankInterior } from "../RankInterior";
+import axios from "axios";
 
 export interface GridProps {
   cards: CardProps[];
@@ -30,6 +31,23 @@ export function Grid({ cards }: GridProps) {
   const [timeLeft, setTimeLeft] = useState(60); // 60 segundos = 1 minuto
   const [timerRunning, setTimerRunning] = useState(false);
   const [ranking, setRanking] = useState(false);
+
+  useEffect(() => {
+    function atualizarVitorias() {
+      const usuarioString = sessionStorage.getItem("usuario");
+      if (usuarioString) {
+        const usuario = JSON.parse(usuarioString);
+        setWins(usuario.vitorias);
+      }
+    }
+    atualizarVitorias();
+    window.onstorage = atualizarVitorias;
+
+    return () => {
+      window.onstorage = null;
+    };
+  }, []);
+  console.log("vitorias", wins);
 
   function openRank() {
     setRanking(!ranking);
@@ -69,20 +87,29 @@ export function Grid({ cards }: GridProps) {
 
   useEffect(() => {
     if (matches === 8) {
-      setWins((prevWins) => prevWins + 1);
       setWinMessage(true);
       setTimerRunning(false); // Parar o timer quando o jogador ganha
+      checkWinCondition();
     } else {
       setWinMessage(false);
     }
   }, [matches]);
 
+  const userId = sessionStorage.getItem("id");
+
   function checkWinCondition() {
-    if (matches === 8) {
-      setWins((prevWins) => prevWins + 1);
-      setWinMessage(true);
-      setTimerRunning(false); // Parar o timer quando o jogador ganha
-    }
+    console.log(matches);
+    axios
+      .put(`http://localhost:5174/atualizarVitoria/${userId}`)
+      .then((response) => {
+        console.log(response.data); // Mensagem de sucesso ou erro
+        setWins((prevWins) => prevWins + 1);
+        setWinMessage(true);
+        setTimerRunning(false); // Parar o timer quando o jogador ganha
+      })
+      .catch((error) => {
+        console.error("Erro:", error);
+      });
   }
 
   function handleClick(id: string) {
@@ -125,7 +152,6 @@ export function Grid({ cards }: GridProps) {
       return card;
     });
     setStateCards(newStateCards);
-    checkWinCondition();
   }
 
   return (
@@ -148,7 +174,8 @@ export function Grid({ cards }: GridProps) {
           <p className="text--GG-g">G</p>
         </div>
         <h1>
-          Memory <p>Game</p> <GiCardJoker className="text--joker" />
+          Memory <p style={{ color: "#a7a7a7" }}>Game</p>{" "}
+          <GiCardJoker className="text--joker" />
           <GiQueenCrown onClick={openRank} className="text--crown" />
           {ranking && <RankInterior />}
         </h1>
