@@ -8,9 +8,17 @@ import axios from "axios";
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
 
-export function FormLoginCad({ handleStartGame }: any) {
+export function FormLoginCad({
+  handleStartGame,
+  setWins,
+  setDefeat,
+  setID,
+  exitButton,
+  login,
+  setLogin,
+}: any) {
   const [modalRank, setModalRank] = useState(false);
-  const [login, setLogin] = useState(true);
+
   const [successMessage, setSuccessMessage] = useState("");
   const [mensagemDeErro, setMensagemDeErro] = useState("");
 
@@ -85,17 +93,15 @@ export function FormLoginCad({ handleStartGame }: any) {
         })
         .then((response) => {
           if (response.data.msg === "Usuário logado com sucesso") {
-            // const userID = response.data.id;
-            // const vitorias = response.data.vitorias;
-            // console.log(vitorias);
-            // console.log(userID);
             sessionStorage.setItem("usuario", JSON.stringify(response.data));
+            setWins(parseInt(response.data.vitorias));
+            setDefeat(parseInt(response.data.derrotas));
+            setID(parseInt(response.data.id));
             setSuccessMessage("Logado com sucesso");
             setTimeout(() => {
               handleStartGame();
             }, 1000);
           }
-          console.log(response);
         });
     } else {
       console.log("Deu erro");

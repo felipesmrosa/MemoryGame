@@ -3,19 +3,41 @@
   left: 31rem;
   top: -1.5%;
   background: #232323;
-  border: 4px solid;
   border-radius: 6px;
-  padding: 0.5rem 1rem;
+  padding: 1rem 1.5rem;
   width: 80%;
   height: 60vh;
   color: #4646de;
   text-align: start;
+  border: 2px solid #4646de;
   h3 {
     @extend %dflex;
     gap: 0.6rem;
     p {
       color: #a7a7a7;
       font-size: 1rem;
+    }
+  }
+  &__menu {
+    @extend %dflex;
+    justify-content: space-around;
+    font-size: 0.9rem;
+    margin-top: 0.7rem;
+    p {
+      cursor: pointer;
+      padding: 0.3rem 1rem;
+      @extend %dflex;
+
+      svg {
+        font-size: 1.3rem;
+      }
+    }
+    &--active {
+      background-color: #4646de;
+      color: #a7a7a7;
+      border-radius: 4px;
+      font-size: 1rem;
+      box-shadow: 3px 3px 0px 0px #2c2c95;
     }
   }
   &__lista {

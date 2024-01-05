@@ -57,6 +57,7 @@ app.post("/logar", (req, res) => {
         res.send({
           msg: "Usuário logado com sucesso",
           id: result[0].id,
+          usuario: result[0].usuario,
           vitorias: result[0].vitorias,
           derrotas: result[0].derrotas,
           tempo: result[0].tempo,
@@ -82,10 +83,11 @@ app.get("/getplayers", (req, res) => {
 
 app.put("/atualizarVitoria/:id", (req, res) => {
   const userId = req.params.id;
+  const { timeLeft } = req.body;
 
   db.query(
-    "UPDATE memorygame SET vitorias = vitorias + 1 WHERE id = ?",
-    userId,
+    "UPDATE memorygame SET vitorias = vitorias + 1, tempo = ? WHERE id = ?",
+    [timeLeft, userId],
     (err, result) => {
       if (err) {
         res.status(500).send(err);
@@ -96,6 +98,39 @@ app.put("/atualizarVitoria/:id", (req, res) => {
     }
   );
 });
+app.put("/atualizarDerrota/:id", (req, res) => {
+  const userId = req.params.id;
+
+  db.query(
+    "UPDATE memorygame SET derrotas = derrotas + 1 WHERE id = ?",
+    userId,
+    (err, result) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        res.status(200).send("Derrota atualizada com sucesso!");
+      }
+      console.log(result);
+    }
+  );
+});
+// app.put("/atualizarTempo/:id", (req, res) => {
+//   const userId = req.params.id;
+//   const { timeLeft } = req.body;
+
+//   db.query(
+//     "UPDATE memorygame SET tempo = ? WHERE id = ?",
+//     [timeLeft, userId],
+//     (err, result) => {
+//       if (err) {
+//         res.status(500).send(err);
+//       } else {
+//         res.status(200).send("Tempo atualizada com sucesso!");
+//       }
+//       console.log(result);
+//     }
+//   );
+// });
 
 app.listen(5174, () => {
   console.log("Rodando Server");

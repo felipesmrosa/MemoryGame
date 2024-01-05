@@ -36,6 +36,11 @@
       color: #a7a7a7;
       transform: rotateY(180deg);
     }
+    &-exit {
+      position: relative;
+      left: 1%;
+      font-size: 1.5rem;
+    }
   }
   &--dflex {
     @extend %dflex;

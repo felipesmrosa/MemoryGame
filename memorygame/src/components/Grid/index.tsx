@@ -4,9 +4,8 @@ import { duplicateRegenerateSortArray } from "../../utills/card-utils";
 import { Tooltip } from "react-tooltip";
 import { Modal } from "../Modal";
 
-import { GiCardJoker, GiQueenCrown } from "react-icons/gi";
-import { Rank } from "../Rank";
-import { RankInterior } from "../RankInterior";
+import { GiCardJoker } from "react-icons/gi";
+import { RxExit } from "react-icons/rx";
 import axios from "axios";
 
 export interface GridProps {
@@ -31,6 +30,14 @@ export function Grid({ cards }: GridProps) {
   const [timeLeft, setTimeLeft] = useState(60); // 60 segundos = 1 minuto
   const [timerRunning, setTimerRunning] = useState(false);
   const [ranking, setRanking] = useState(false);
+  const [ID, setID] = useState(0);
+  const [login, setLogin] = useState(true);
+
+  function exitButton() {
+    setStartGame(true);
+    setTimerRunning(false); // Parar o timer
+    sessionStorage.clear();
+  }
 
   useEffect(() => {
     function atualizarVitorias() {
@@ -47,7 +54,6 @@ export function Grid({ cards }: GridProps) {
       window.onstorage = null;
     };
   }, []);
-  console.log("vitorias", wins);
 
   function openRank() {
     setRanking(!ranking);
@@ -78,8 +84,16 @@ export function Grid({ cards }: GridProps) {
         setTimeLeft((prevTime) => prevTime - 1);
       }, 1000);
     } else if (timeLeft === 0 && timerRunning) {
-      setLoseMessage(true);
-      setDefeat((prevDefeat) => prevDefeat + 1);
+      axios
+        .put(`http://localhost:5174/atualizarDerrota/${ID}`)
+        .then((response) => {
+          console.log(response.data); // Mensagem de sucesso ou erro
+          setLoseMessage(true);
+          setDefeat((prevDefeat) => prevDefeat + 1);
+        })
+        .catch((error) => {
+          console.error("Erro:", error);
+        });
     }
 
     return () => clearTimeout(timer);
@@ -95,17 +109,20 @@ export function Grid({ cards }: GridProps) {
     }
   }, [matches]);
 
-  const userId = sessionStorage.getItem("id");
+  const sessentamenosTime = 60 - timeLeft;
 
   function checkWinCondition() {
-    console.log(matches);
+    // console.log(matches);
     axios
-      .put(`http://localhost:5174/atualizarVitoria/${userId}`)
+      .put(`http://localhost:5174/atualizarVitoria/${ID}`, {
+        timeLeft: sessentamenosTime,
+      })
       .then((response) => {
         console.log(response.data); // Mensagem de sucesso ou erro
         setWins((prevWins) => prevWins + 1);
         setWinMessage(true);
         setTimerRunning(false); // Parar o timer quando o jogador ganha
+        setTimeLeft(sessentamenosTime);
       })
       .catch((error) => {
         console.error("Erro:", error);
@@ -166,18 +183,23 @@ export function Grid({ cards }: GridProps) {
         timeLeft={timeLeft}
         handleReset={handleReset}
         loseMessage={loseMessage}
+        setWins={setWins}
+        setDefeat={setDefeat}
+        setID={setID}
+        exitButton={exitButton}
+        login={login}
+        setLogin={setLogin}
       />
 
       <div className="text">
         <div style={{ cursor: "pointer" }} className="text--GG">
           <p>G</p>
           <p className="text--GG-g">G</p>
+          <RxExit onClick={exitButton} className="text--GG-exit" />
         </div>
         <h1>
-          Memory <p style={{ color: "#a7a7a7" }}>Game</p>{" "}
+          Memory <p style={{ color: "#a7a7a7" }}>Game</p>
           <GiCardJoker className="text--joker" />
-          <GiQueenCrown onClick={openRank} className="text--crown" />
-          {ranking && <RankInterior />}
         </h1>
         <p className="text--dflex">
           <p>

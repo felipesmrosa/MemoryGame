@@ -12,6 +12,12 @@ export function Modal({
   handleReset,
   loseMessage,
   openRank,
+  setWins,
+  setDefeat,
+  setID,
+  exitButton,
+  login,
+  setLogin,
 }: any) {
   return (
     <>
@@ -21,13 +27,23 @@ export function Modal({
         player={player}
         setPlayer={setPlayer}
         handleStartGame={handleStartGame}
+        setWins={setWins}
+        setDefeat={setDefeat}
+        setID={setID}
+        exitButton={exitButton}
+        login={login}
+        setLogin={setLogin}
       />
       <WinnerModal
         winMessage={winMessage}
         timeLeft={timeLeft}
         handleReset={handleReset}
       />
-      <DefeatModal loseMessage={loseMessage} handleReset={handleReset} />
+      <DefeatModal
+        setDefeat={setDefeat}
+        loseMessage={loseMessage}
+        handleReset={handleReset}
+      />
     </>
   );
 }
