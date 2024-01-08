@@ -24,9 +24,15 @@ export function Rank() {
                 <p className="rank__lista__player--primeiroLugar-alinhado">
                   {play.usuario} <IoStar />
                 </p>
-                <p className="row">
-                  {isByLessTime ? play.tempo : play.vitorias}s
-                </p>
+                {isByLessTime ? (
+                  <p className="row">
+                    {play.tempo} <p className="tempo">s</p>
+                  </p>
+                ) : (
+                  <p className="row">
+                    {play.vitorias} <p className="wins">wins</p>
+                  </p>
+                )}
               </div>
             </li>
           ))}

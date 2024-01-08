@@ -35,6 +35,7 @@ export function Modal({
         setLogin={setLogin}
       />
       <WinnerModal
+        openRank={openRank}
         winMessage={winMessage}
         timeLeft={timeLeft}
         handleReset={handleReset}

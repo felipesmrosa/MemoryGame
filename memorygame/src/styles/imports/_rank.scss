@@ -1,6 +1,6 @@
 .rank {
   position: absolute;
-  left: 31rem;
+  left: 37rem;
   top: -1.5%;
   background: #232323;
   border-radius: 6px;
@@ -10,6 +10,7 @@
   color: #4646de;
   text-align: start;
   border: 2px solid #4646de;
+
   h3 {
     @extend %dflex;
     gap: 0.6rem;

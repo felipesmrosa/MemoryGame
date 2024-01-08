@@ -44,10 +44,15 @@ $fontFamily: "Poppins", sans-serif;
   padding: 0;
   box-sizing: border-box;
   font-family: $fontFamily;
+  user-select: none;
 }
 
 body {
   background-color: $preto;
+}
+
+div#root {
+  margin: 0 1rem;
 }
 
 .app {
@@ -125,4 +130,12 @@ hr.rank-linha {
 }
 .row {
   @extend %dflex;
+}
+.row-space {
+  @extend %dflex;
+  justify-content: space-between;
+}
+.tempo,
+.wins {
+  font-size: 0.875rem;
 }

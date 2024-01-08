@@ -109,20 +109,23 @@ export function Grid({ cards }: GridProps) {
     }
   }, [matches]);
 
-  const sessentamenosTime = 60 - timeLeft;
+  const tempoInicial = 60; // Seu valor inicial
+  const tempoRestante = timeLeft; // Seu valor de tempo restante
+
+  const tempoGasto = tempoInicial - tempoRestante; // Cálculo do tempo gasto
 
   function checkWinCondition() {
     // console.log(matches);
     axios
       .put(`http://localhost:5174/atualizarVitoria/${ID}`, {
-        timeLeft: sessentamenosTime,
+        timeLeft: tempoGasto,
       })
       .then((response) => {
         console.log(response.data); // Mensagem de sucesso ou erro
         setWins((prevWins) => prevWins + 1);
         setWinMessage(true);
         setTimerRunning(false); // Parar o timer quando o jogador ganha
-        setTimeLeft(sessentamenosTime);
+        setTimeLeft(tempoGasto);
       })
       .catch((error) => {
         console.error("Erro:", error);
@@ -201,12 +204,14 @@ export function Grid({ cards }: GridProps) {
           Memory <p style={{ color: "#a7a7a7" }}>Game</p>
           <GiCardJoker className="text--joker" />
         </h1>
-        <p className="text--dflex">
-          <p>
-            Vitórias: {wins} | Derrotas: {defeat}
-          </p>
-          <p>
-            Movimentos: {moves} | Acertos: {matches}
+        <div className="row-space">
+          <p className="text--dflex">
+            <p>
+              Vitórias: {wins} | Derrotas: {defeat}
+            </p>
+            <p>
+              Movimentos: {moves} | Acertos: {matches}
+            </p>
           </p>
           <div className="pixelated-clock">
             <p
@@ -225,7 +230,7 @@ export function Grid({ cards }: GridProps) {
               id="tempoDoDesafio"
             />
           </div>
-        </p>
+        </div>
       </div>
       <div className="grid">
         {stateCards.map((card) => (

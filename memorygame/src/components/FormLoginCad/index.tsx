@@ -26,7 +26,7 @@ export function FormLoginCad({
     if (mensagemDeErro) {
       const timer = setTimeout(() => {
         setMensagemDeErro("");
-      }, 1000);
+      }, 1500);
 
       return () => clearTimeout(timer);
     }
@@ -83,7 +83,6 @@ export function FormLoginCad({
               setLogin(true);
             }, 800);
           }
-          console.log(response);
         });
     } else if (type === "Logar") {
       axios
@@ -92,7 +91,9 @@ export function FormLoginCad({
           senha: values.senha,
         })
         .then((response) => {
-          if (response.data.msg === "Usuário logado com sucesso") {
+          if (response.data.msg === "Conta não encontrada") {
+            setMensagemDeErro("Usuário não encontrado.");
+          } else if (response.data.msg === "Usuário logado com sucesso") {
             sessionStorage.setItem("usuario", JSON.stringify(response.data));
             setWins(parseInt(response.data.vitorias));
             setDefeat(parseInt(response.data.derrotas));
@@ -195,8 +196,6 @@ export function FormLoginCad({
             <button
               type="submit"
               className="modal__content__formulario--buttonStart"
-              // onClick={handleClickButton}
-              // onClick={handleStartGame}
             >
               {login ? <FaPlay /> : "Cadastrar"}
             </button>
