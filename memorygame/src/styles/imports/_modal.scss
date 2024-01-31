@@ -2,6 +2,7 @@
   0% {
     background-position: 0;
   }
+
   100% {
     background-position: 300%;
   }
@@ -39,9 +40,11 @@
     @media screen and (max-width: 768px) {
       max-width: 90%;
     }
+
     @media screen and (min-width: 768px) and (max-width: 1024px) {
       max-width: 60%;
     }
+
     @media screen and (min-width: 1024px) and (max-width: 1366px) {
       max-width: 45%;
     }
@@ -52,21 +55,32 @@
       position: absolute;
       width: calc(100% + 15px);
       height: calc(100% + 15px);
-      background: linear-gradient(
-        45deg,
-        $primeiraCor,
-        $segundaCor,
-        $terceiraCor,
-        $quartaCor,
-        $quintaCor,
-        $primeiraCor,
-        $segundaCor
-      );
+      background: linear-gradient(45deg,
+          $primeiraCor,
+          $segundaCor,
+          $terceiraCor,
+          $quartaCor,
+          $quintaCor,
+          $primeiraCor,
+          $segundaCor );
       z-index: -1;
       background-size: 300%;
       border-radius: 8px;
       animation: AnimarBorda 5s linear infinite;
     }
+
+    &--idiomas {
+      @extend %dflex;
+      justify-content: center;
+      gap: .5rem;
+      
+      cursor: pointer;
+      position: absolute;
+      padding: 0.5rem 0 0 0.5rem;
+      top: 0;
+      left: 0;
+    }
+
     &--crown {
       font-size: 2.8rem;
       color: goldenrod;
@@ -76,6 +90,7 @@
       top: 0;
       right: 0;
     }
+
     &::after {
       filter: blur(50px);
     }
@@ -85,6 +100,7 @@
       justify-content: center;
       flex-direction: column;
       width: 78%;
+
       &__player {
         color: #a7a7a7;
         margin-top: 1rem;
@@ -101,11 +117,13 @@
           color: $secundaria;
         }
       }
+
       &__error {
         font-size: 0.7rem;
         color: #e45959;
         margin-top: 0.5rem;
       }
+
       &__cadastrarEResetarSenha {
         @extend %dflex;
         justify-content: space-between;

@@ -3,7 +3,14 @@ import { GiQueenCrown } from "react-icons/gi";
 import { Rank } from "../Rank";
 import { useEffect, useState } from "react";
 
+import { BandeiraBrasil } from "../Brasil";
+import { BandeiraUSA } from "../USA";
+
 import axios from "axios";
+
+import { useTranslation } from "react-i18next";
+import "../../i18n/idiomas/en.json";
+import "../../i18n/idiomas/pt.json";
 
 import { Formik, Form, Field, ErrorMessage } from "formik";
 import * as yup from "yup";
@@ -17,10 +24,14 @@ export function FormLoginCad({
   login,
   setLogin,
 }: any) {
+  const { t, i18n } = useTranslation();
+
   const [modalRank, setModalRank] = useState(false);
 
   const [successMessage, setSuccessMessage] = useState("");
   const [mensagemDeErro, setMensagemDeErro] = useState("");
+
+  const [idiomaAtivo, setIdiomaAtivo] = useState(true);
 
   useEffect(() => {
     if (mensagemDeErro) {
@@ -45,22 +56,22 @@ export function FormLoginCad({
   const validationCadastro = yup.object().shape({
     usuario: yup
       .string()
-      .min(3, "O usuário deve conter no minimo 3 caracteres")
-      .required("Campo obrigatório"),
+      .min(3, i18n.t("validacao_usuario_minimo"))
+      .required(i18n.t("campo_obrigatorio")),
     senha: yup
       .string()
-      .min(6, "A senha deve conter no minimo 6 caracteres")
-      .required("Campo obrigatório"),
+      .min(6, i18n.t("validacao_senha_minimo"))
+      .required(i18n.t("campo_obrigatorio")),
     confirmSenha: yup
       .string()
-      .oneOf([yup.ref("senha"), null], "As senhas não conferem")
-      .min(6, "A senha deve conter no minimo 6 caracteres")
-      .required("Campo obrigatório"),
+      .oneOf([yup.ref("senha"), null], i18n.t("senhas_diferentes"))
+      .min(6, i18n.t("minimo_6_caracteres_senha"))
+      .required(i18n.t("campo_obrigatorio")),
   });
 
   const validationLogin = yup.object().shape({
-    usuario: yup.string().required("Campo obrigatório"),
-    senha: yup.string().required("Campo obrigatório"),
+    usuario: yup.string().required(i18n.t("campo_obrigatorio")),
+    senha: yup.string().required(i18n.t("campo_obrigatorio")),
   });
 
   function openModalRank() {
@@ -76,9 +87,9 @@ export function FormLoginCad({
         })
         .then((response) => {
           if (response.data.msg === "Usuário já cadastrado.") {
-            setMensagemDeErro("Usuário já cadastrado");
+            setMensagemDeErro(i18n.t("usuario_cadastrado"));
           } else if (response.data.msg === "Cadastrado com sucesso!") {
-            setSuccessMessage("Cadastrado com sucesso");
+            setSuccessMessage(i18n.t("cadastrado_com_sucesso"));
             setTimeout(() => {
               setLogin(true);
             }, 800);
@@ -92,13 +103,13 @@ export function FormLoginCad({
         })
         .then((response) => {
           if (response.data.msg === "Conta não encontrada") {
-            setMensagemDeErro("Usuário não encontrado.");
+            setMensagemDeErro(i18n.t("conta_nao_encontrada"));
           } else if (response.data.msg === "Usuário logado com sucesso") {
             sessionStorage.setItem("usuario", JSON.stringify(response.data));
             setWins(parseInt(response.data.vitorias));
             setDefeat(parseInt(response.data.derrotas));
             setID(parseInt(response.data.id));
-            setSuccessMessage("Logado com sucesso");
+            setSuccessMessage(i18n.t("logado_com_sucesso"));
             setTimeout(() => {
               handleStartGame();
             }, 1000);
@@ -108,6 +119,10 @@ export function FormLoginCad({
       console.log("Deu erro");
     }
   }
+
+  const changeLanguage = (lng: any) => {
+    i18n.changeLanguage(lng);
+  };
   return (
     <Formik
       onSubmit={(e) => handleSubmit(e, login ? "Logar" : "Cadastrar")}
@@ -126,12 +141,25 @@ export function FormLoginCad({
             onClick={openModalRank}
             className="modal__content--crown"
           />
+          <div className="modal__content--idiomas">
+            <img
+              style={{ width: "25px", cursor: "pointer" }}
+              src="../../src/img/brasil.png"
+              onClick={() => changeLanguage("pt")}
+            />
+            <img
+              style={{ width: "25px", cursor: "pointer" }}
+              src="../../src/img/usa.png"
+              onClick={() => changeLanguage("en")}
+            />
+          </div>
           {modalRank && <Rank />}
           <h2>
-            Insira seus <p className="modal__content--nome">dados</p>
+            {t("insira_seus")}
+            <p className="modal__content--nome">{t("dados")}</p>
           </h2>
           <p style={{ fontSize: "0.6em" }}>
-            Para {login ? "logar" : "cadastrar"}
+            {t("para")} {login ? t("logar") : t("cadastrar")}
           </p>
           <Form
             // onSubmit={(e) => handleSubmit(e, login ? "Logar" : "Cadastrar")}
@@ -140,7 +168,7 @@ export function FormLoginCad({
             <Field
               className="modal__content__formulario__player"
               type="text"
-              placeholder="Usuário"
+              placeholder={t("usuario")}
               name="usuario"
               autoComplete="off"
               id="usuario"
@@ -153,7 +181,7 @@ export function FormLoginCad({
             <Field
               className="modal__content__formulario__player"
               type="password"
-              placeholder="Senha"
+              placeholder={t("senha")}
               name="senha"
               autoComplete="off"
               id="senha"
@@ -169,7 +197,7 @@ export function FormLoginCad({
                 <Field
                   className="modal__content__formulario__player"
                   type="password"
-                  placeholder="Confirmar Senha"
+                  placeholder={t("confirmar_senha")}
                   name="confirmSenha"
                   autoComplete="off"
                 />
@@ -183,21 +211,21 @@ export function FormLoginCad({
             <div className="modal__content__formulario__cadastrarEResetarSenha">
               {login && (
                 <p className="modal__content__formulario__cadastrarEResetarSenha--buttonText">
-                  Esqueceu sua senha?
+                  {t("esqueceu_sua_senha")}
                 </p>
               )}
               <p
                 onClick={() => setLogin(!login)}
                 className="modal__content__formulario__cadastrarEResetarSenha--buttonText"
               >
-                {login ? "Cadastrar" : "Logar"}
+                {login ? t("cadastrar") : t("logar")}
               </p>
             </div>
             <button
               type="submit"
               className="modal__content__formulario--buttonStart"
             >
-              {login ? <FaPlay /> : "Cadastrar"}
+              {login ? <FaPlay /> : t("cadastrar")}
             </button>
             {successMessage && (
               <div className="message-sucesso">{successMessage}</div>

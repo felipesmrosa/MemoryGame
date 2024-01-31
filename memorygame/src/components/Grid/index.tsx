@@ -7,6 +7,7 @@ import { Modal } from "../Modal";
 import { GiCardJoker } from "react-icons/gi";
 import { RxExit } from "react-icons/rx";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 export interface GridProps {
   cards: CardProps[];
@@ -174,6 +175,8 @@ export function Grid({ cards }: GridProps) {
     setStateCards(newStateCards);
   }
 
+  const { t, i18n } = useTranslation();
+
   return (
     <>
       <Modal
@@ -201,23 +204,23 @@ export function Grid({ cards }: GridProps) {
           <RxExit onClick={exitButton} className="text--GG-exit" />
         </div>
         <h1>
-          Memory <p style={{ color: "#a7a7a7" }}>Game</p>
+          {t("jogo_da")} <p style={{ color: "#a7a7a7" }}>{t("memoria")}</p>
           <GiCardJoker className="text--joker" />
         </h1>
         <div className="row-space">
           <p className="text--dflex">
             <p>
-              Vitórias: {wins} | Derrotas: {defeat}
+              {t("vitorias")} {wins} | {t("derrotas")} {defeat}
             </p>
             <p>
-              Movimentos: {moves} | Acertos: {matches}
+              {t("movimentos")} {moves} | {t("acertos")}: {matches}
             </p>
           </p>
           <div className="pixelated-clock">
             <p
               id="seconds"
               data-tooltip-id="tempoDoDesafio"
-              data-tooltip-content="Você deve completar o desafio antes do tempo acabar."
+              data-tooltip-content={t("completar_jogo_antes_do_tempo_acabar")}
             >
               {timeLeft}s
             </p>

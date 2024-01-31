@@ -3,10 +3,13 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 import { HiMiniTrophy } from "react-icons/hi2";
 import { MdAccessTimeFilled } from "react-icons/md";
+import { useTranslation } from "react-i18next";
 
 export function Rank() {
   const [player, setPlayers] = useState([]);
   const [activeOption, setActiveOption] = useState("menosTempo");
+
+  const { t, i18n } = useTranslation();
 
   function ranking() {
     const isByLessTime = activeOption === "menosTempo";
@@ -57,7 +60,7 @@ export function Rank() {
           className={activeOption === "menosTempo" ? "rank__menu--active" : ""}
           onClick={() => setActiveOption("menosTempo")}
         >
-          Menos tempo
+          {t("menos_tempo")}
           <MdAccessTimeFilled />
         </p>
         <p
@@ -66,7 +69,7 @@ export function Rank() {
           }
           onClick={() => setActiveOption("maisVitorias")}
         >
-          Mais vitórias <HiMiniTrophy />
+          {t("mais_vitorias")} <HiMiniTrophy />
         </p>
       </div>
       {ranking()}

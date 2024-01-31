@@ -1,0 +1,40 @@
+{
+  "insira_seus": "Enter your",
+  "dados": "details",
+  "para": "To",
+  "logar": "log in",
+  "cadastrar": "register",
+  "esqueceu_sua_senha": "Forgot your password?",
+  "usuario": "Username",
+  "senha": "Password",
+  "confirmar_senha": "Confirm Password",
+  "menos_tempo": "Less time",
+  "mais_vitorias": "More wins",
+  "campo_obrigatorio": "Required field",
+  "validacao_usuario_minimo": "User must not contain at least 3 characters",
+  "validacao_senha_minimo": "The password must contain at least 6 characters",
+  "senhas_diferentes": "Passwords don't match",
+  "minimo_6_caracteres_senha": "The password must contain at least 6 characters",
+  "usuario_cadastrado": "Already registered user.",
+  "cadastrado_com_sucesso": "Registered successfully",
+  "conta_nao_encontrada": "User not found.",
+  "logado_com_sucesso": "Logged in successfully",
+
+  "vitorias": "Victories:",
+  "derrotas": "Defeats:",
+  "movimentos": "Movements:",
+  "acertos": "Hits:",
+
+  "jogo_da": "Memory",
+  "memoria": "Game",
+
+  "completar_jogo_antes_do_tempo_acabar": "You must complete the challenge before time runs out.",
+
+  "que_pena": "Sorry...",
+  "voce_perdeu": "You lost!",
+  "jogar_novamente": "play again",
+
+  "parabens": "Congratulations!",
+  "voce_ganhou": "You won,",
+  "em_apenas": "In only"
+}

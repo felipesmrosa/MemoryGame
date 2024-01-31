@@ -2,6 +2,7 @@ import { useState } from "react";
 import ConfettiExplosion from "react-confetti-explosion";
 import { GiQueenCrown } from "react-icons/gi";
 import { Rank } from "../Rank";
+import { t } from "i18next";
 
 export function WinnerModal({
   winMessage,
@@ -24,13 +25,13 @@ export function WinnerModal({
               className="modal__content--crown"
             />
             {rank && <Rank />}
-            <h3 style={{ color: "#4646de" }}>Parabéns!</h3>
-            <p>Você ganhou,</p>
+            <h3 style={{ color: "#4646de" }}>{t("parabens")}</h3>
+            <p>{t("voce_ganhou")}</p>
             <p style={{ textTransform: "capitalize" }}>
-              Em apenas {timeLeft}s!
+              {t("em_apenas")} {timeLeft}s!
             </p>
             <button className="win__message--btn" onClick={handleReset}>
-              Jogar Novamente
+              {t("jogar_novamente")}
             </button>
           </div>
           <ConfettiExplosion className="win__message--confeti" />

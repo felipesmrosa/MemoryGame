@@ -1,0 +1,40 @@
+{
+  "insira_seus": "Insira Seus",
+  "dados": "Dados",
+  "para": "Para",
+  "logar": "logar",
+  "cadastrar": "cadastrar",
+  "esqueceu_sua_senha": "Esqueceu sua senha?",
+  "usuario": "Usuário",
+  "senha": "Senha",
+  "confirmar_senha": "Confirmar Senha",
+  "menos_tempo": "Menos tempo",
+  "mais_vitorias": "Mais Vitórias",
+  "campo_obrigatorio": "Campo Obrigatório",
+  "validacao_usuario_minimo": "O usuário deve conter no minimo 3 caracteres",
+  "validacao_senha_minimo": "A senha deve conter no minimo 6 caracteres",
+  "senhas_diferentes": "As senhas não conferem",
+  "minimo_6_caracteres_senha": "A senha deve conter no minimo 6 caracteres",
+  "usuario_cadastrado": "Usuário já cadastrado.",
+  "cadastrado_com_sucesso": "Cadastrado com sucesso",
+  "conta_nao_encontrada": "Usuário não encontrado.",
+  "logado_com_sucesso": "Logado com sucesso",
+
+  "vitorias": "Vitórias:",
+  "derrotas": "Derrotas:",
+  "movimentos": "Movimentos:",
+  "acertos": "Acertos:",
+
+  "jogo_da": "Jogo Da",
+  "memoria": "Memória",
+
+  "completar_jogo_antes_do_tempo_acabar": "Você deve completar o desafio antes do tempo acabar.",
+
+  "que_pena": "Que pena...",
+  "voce_perdeu": "Você perdeu!",
+  "jogar_novamente": "Jogar Novamente",
+
+  "parabens": "Parabéns!",
+  "voce_ganhou": "Você ganhou,",
+  "em_apenas": "Em apenas"
+}
