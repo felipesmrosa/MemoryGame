@@ -3,9 +3,6 @@ import { GiQueenCrown } from "react-icons/gi";
 import { Rank } from "../Rank";
 import { useEffect, useState } from "react";
 
-import { BandeiraBrasil } from "../Brasil";
-import { BandeiraUSA } from "../USA";
-
 import axios from "axios";
 
 import { useTranslation } from "react-i18next";
